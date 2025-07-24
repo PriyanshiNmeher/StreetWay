@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" version="1.1" width="595.5" height="841.92" viewBox="0 0 595.5 841.92">
+<defs>
+<clipPath id="clip_0">
+<path transform="matrix(.24,0,0,.24,0,0)" d="M0 115.625H2481.25V3393.75H0Z" clip-rule="evenodd"/>
+</clipPath>
+</defs>
+<g clip-path="url(#clip_0)">
+<path transform="matrix(.75,0,0,.75,0,27.75)" d="M0 0H794V60H0Z" fill="#ffffff"/>
+<path transform="matrix(.75,0,0,.75,0,27.75)" d="M0 0H794V60H0Z" fill="#ffffff"/>
+<text fill="#00bf63" xml:space="preserve" transform="matrix(.75 0 0 .75 0 27.75)" font-size="42.66" font-family="ATBScript"><tspan y="39" x="37">S</tspan></text>
+<text xml:space="preserve" transform="matrix(.75 0 0 .75 0 27.75)" font-size="42.66" font-family="ATBScript"><tspan y="39" x="74.96875 86.44327 107.60074 127.00931 146.41788">treet</tspan></text>
+<text fill="#00bf63" xml:space="preserve" transform="matrix(.75 0 0 .75 0 27.75)" font-size="42.66" font-family="ATBScript"><tspan y="39" x="157.90625">W</tspan></text>
+<text xml:space="preserve" transform="matrix(.75 0 0 .75 0 27.75)" font-size="42.66" font-family="ATBScript"><tspan y="39" x="203.98438 230.3459">ay</tspan></text>
+</g>
+</svg>
