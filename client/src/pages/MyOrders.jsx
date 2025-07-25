@@ -12,7 +12,7 @@ const MyOrders = () => {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       }
-            )
+        })
         if(data.success){
             setMyOrders(data.orders)
         }
