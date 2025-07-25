@@ -22,12 +22,13 @@ const SellerLayout = () => {
         const { data } = await axios.get('/api/seller/logout');
         if(data.success){
             toast.success(data.message)
+             localStorage.setItem("sellertoken", "")
             navigate('/')
         }else{
             toast.error(data.message)
         }
        } catch (error) {
-         toast.error(error.message)
+         toast.error(error.response?.data?.message || error.message)
        }
     }
 
