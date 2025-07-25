@@ -7,12 +7,18 @@ import toast from 'react-hot-toast'
 const Navbar = () => {
         const [open, setOpen] = React.useState(false)
     const {user, axios, setUser, setShowUserLogin, navigate, setSearchQuery, searchQuery, getCartCount} = useAppContext();
-
+ const token = localStorage.getItem("token")
     const logout =  async ()=>{
         try {
-            const {data} = await axios.get('/api/user/logout')
+            const {data} = await axios.get('/api/user/logout', {
+                header:{
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "apllication/json"
+                }
+            })
             if (data.success) {
                 toast.success(data.message)
+                    localStorage.setItem("token", "")
                  setUser(null);
         navigate('/')
             } else {
