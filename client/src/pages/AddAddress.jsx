@@ -50,6 +50,11 @@ const [address, setAddress] = useState({
         try {
             const {data}= await axios.post('/api/address/add', {address,
                 userId: user._id
+            },
+        {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`
+                }
             });
            
 
