@@ -8,7 +8,12 @@ const {products, currency, axios, fetchProducts} = useAppContext()
   
 const toggleStock = async (id, inStock)=>{
 try {
-    const { data } = await axios.post('/api/product/stock', {id, inStock});
+  const token = localStorage.getItem('sellerToken');
+    const { data } = await axios.post('/api/product/stock', {id, inStock}, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
     if(data.success){
     fetchProducts();
     toast.success(data.message)
