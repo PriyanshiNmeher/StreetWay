@@ -20,7 +20,7 @@ await connectCloudinary()
 
 //Allow multiple origins
 
-const allowedOrigins = ['http://localhost:5173', 'https://streetway-backend.onrender.com']
+const allowedOrigins = ['http://localhost:5173', 'https://streetway-frontend.onrender.com']
 
 app.post('/stripe', express.raw({type: 'application/json'}), stripeWebhooks)
 
@@ -40,6 +40,6 @@ app.use('/api/order', orderRouter)
 
 
 app.listen(port, ()=>{
-    console.log(`Server is running on http://localhost:${port}`, `https://streetway-backend.onrender.com`)
+    console.log(`Server is running on http://localhost:${port}`, `https://streetway-frontend.onrender.com`)
 })
 
