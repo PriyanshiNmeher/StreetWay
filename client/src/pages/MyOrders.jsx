@@ -8,7 +8,10 @@ const MyOrders = () => {
 
     const fetchMyOrders = async ()=>{
        try {
-        const {data} = await axios.get('/api/order/user')
+        const {data} = await axios.get('/api/order/user', {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },)
         if(data.success){
             setMyOrders(data.orders)
         }
