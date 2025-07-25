@@ -14,6 +14,7 @@ const onSubmitHandler = async (event)=>{
       event.preventDefault();
       const {data} = await axios.post('/api/seller/login', {email, password})
       if(data.success){
+          localStorage.setItem("sellertoken", data?.token)
         setIsSeller(true)
         navigate('/seller')
       }else{
