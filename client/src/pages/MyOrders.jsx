@@ -11,7 +11,8 @@ const MyOrders = () => {
         const {data} = await axios.get('/api/order/user', {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },)
+      }
+            )
         if(data.success){
             setMyOrders(data.orders)
         }
