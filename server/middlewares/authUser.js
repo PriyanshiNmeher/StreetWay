@@ -24,7 +24,7 @@ console.log("id", tokenDecode?.id)
         return res.json({success: false, message: 'Not Authorized'});
        }
        req.user = user;
-   req.userId = user._id;
+      //  req.userId = user._id;
        next();
        
      } catch (error) {
