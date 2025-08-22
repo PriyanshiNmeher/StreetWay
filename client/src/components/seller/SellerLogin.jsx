@@ -1,35 +1,65 @@
-import jwt from 'jsonwebtoken';
-import User from "../models/User.js";
+import React, { useEffect, useState } from 'react'
+import { useAppContext } from '../../context/AppContext'
+import toast from 'react-hot-toast'
 
- 
+const SellerLogin = () => {
 
-const authUser = async (req, res, next)=>{
-  try {
-    const token = req.cookies?.token || req.header("Authorization")?.replace("Bearer ", "");
-console.log(token, "token")
-    if(!token){
-        return res.json({success: false, message: 'Not Authorized'});
-    }
+const {isSeller, setIsSeller, navigate, axios, setAxiosSellerToken, fetchSeller} = useAppContext()
+const [email, setEmail] = useState("");
+const [password, setPassword] = useState("");
 
-       const tokenDecode = jwt.verify(token, process.env.JWT_SECRET)
-       req.data = {userId: tokenDecode.id}
-       console.log(tokenDecode,"decoded token")             
-console.log("id", tokenDecode?.id)
-       const user = await User.findById(tokenDecode?.id).select("-password -refreshToken")
-       console.log(user, "user")
-       if(tokenDecode.id){
-        req.userId = tokenDecode.id;
+const onSubmitHandler = async (event)=>{
+    try {
+      event.preventDefault();
+      const {data} = await axios.post('/api/seller/login', {email, password})
+      
+      console.log("Seller login response:", data); 
+      
+      if(data.success){
         
-       }else{
-        return res.json({success: false, message: 'Not Authorized'});
-       }
-       req.user = user;
-      //  req.userId = user._id;
-       next();
-       
-     } catch (error) {
-       res.json({success: false, message: error.message });
-     }
+        if (data.sellerToken) {
+            localStorage.setItem("sellerToken", data.sellerToken);
+            setAxiosSellerToken();
+        }
+        
+        setIsSeller(true)
+        navigate('/seller')
+        toast.success('Seller login successful!')
+      }else{
+        toast.error(data.message)
+      }
+    } catch (error) {
+       console.log("Seller login error:", error);
+       toast.error(error.response?.data?.message || error.message || 'Something went wrong')
+    }
 }
 
-export default authUser;
+useEffect(()=>{
+    if(isSeller){
+        navigate("/seller")
+    }
+},[isSeller])
+
+useEffect(() => {
+    fetchSeller();
+}, []);
+
+  return !isSeller && (
+    <form onSubmit={onSubmitHandler} className='min-h-screen flex items-center text-sm text-gray-600'>
+         <div className='flex flex-col gap-5 m-auto items-start p-8 py-12 min-w-80 sm:min-w-88 rounded-lg shadow-xl border-gray-200'>
+            <p className='text-2xl font-medium m-auto'><span className='text-primary'>Seller</span>Login</p>
+            <div className='w-full'>
+              <p>Email</p>
+              <input onChange={(e)=>setEmail(e.target.value)} value={email} type="email" placeholder='enter your email' className='border border-gray-200 rounded w-full p-2 mt-1 outline-primary' required/>
+            </div>
+            <div className='w-full'>
+              <p>Password</p>
+              <input onChange={(e)=>setPassword(e.target.value)} value={password} type="password" placeholder='enter your password' className='border border-gray-200 rounded w-full p-2 mt-1 outline-primary' required/>
+            </div>
+            <button className='bg-primary text-white w-full py-2 rounded-md cursor-pointer'>Login</button>
+        </div>
+     </form>
+  )
+}
+
+export default SellerLogin
