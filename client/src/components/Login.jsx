@@ -1,10 +1,11 @@
+
 import React from 'react'
 import { useAppContext } from '../context/AppContext';
 import toast from 'react-hot-toast';
 
 const Login = () => {
 
-    const {setShowUserLogin, setUser, axios, navigate} = useAppContext()
+    const {setShowUserLogin, setUser, axios, navigate, setAxiosToken} = useAppContext()
 
     const [state, setState] = React.useState("login");
     const [name, setName] = React.useState("");
@@ -19,19 +20,28 @@ const Login = () => {
            const {data} = await axios.post(`/api/user/${state}`,{
                name, email, password
            });
+           
+           console.log("Login/Register response:", data); // Debug के लिए
+           
            if (data.success) {
-               localStorage.setItem("token", data?.token)
-            navigate('/')
-            setUser(data.user)
-           setShowUserLogin(false)        
+            // Token save करें
+            if (data.token) {
+                localStorage.setItem("token", data.token);
+                setAxiosToken(); // Axios headers update करें
+            }
+            
+            setUser(data.user);
+            setShowUserLogin(false);
+            navigate('/');
+            toast.success(state === 'login' ? 'Login successful!' : 'Account created successfully!');
 
            } else {
             toast.error(data.message)
            }
-console.log(data)
+
        } catch (error) {
-            toast.error(error.message)
-        
+            console.log("Login/Register error:", error);
+            toast.error(error.response?.data?.message || error.message || 'Something went wrong');
        }
         
     }
