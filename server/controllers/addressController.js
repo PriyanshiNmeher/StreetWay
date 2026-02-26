@@ -1,37 +1,3 @@
-// import Address from "../models/Address.js"
-
-
-// // Add Address : /api/address/add
-
-
-// export const addAddress = async(req, res)=>{
-//    try {
-//     const { address } = req.body;
-//     const userId = req.userId; 
-
-
-//     await Address.create({...address, userId})
-    
-//     res.json({success: true, message: "Address added successfully"})
-//    } catch (error) {
-//     console.log(error.message);
-//     res.json({ success: false, message: error.message});
-//    }
-// }
-
-// // Get Address: /api/address/get
-
-// export const getAddress = async(req, res)=>{
-// try {
-//     const { userId }= req.query;
-//     const addresses = await Address.find({userId})
-//     res.json({success: true, addresses})
-
-// } catch (error) {
-//     console.log(error.message);
-//     res.json({ success: false, message: error.message});
-// }
-// } 
 
 import Address from "../models/Address.js"
 
@@ -70,15 +36,9 @@ export const addAddress = async(req, res)=>{
 // Get Address: /api/address/get
 export const getAddress = async(req, res)=>{
 try {
-<<<<<<< HEAD
     const userId = req.userId; // ✅ middleware से userId लें
     
     console.log("Get address userId:", userId); // Debug के लिए
-=======
-    const userId = req.userId;
-    
-    console.log("Get address userId:", userId);
->>>>>>> 3316e6f63e778adb377ac4d5fbecfb9b3b04c5f7
     
     if (!userId) {
         return res.json({success: false, message: "User not authenticated"});
@@ -86,20 +46,11 @@ try {
     
     const addresses = await Address.find({userId});
     
-<<<<<<< HEAD
     console.log("Found addresses:", addresses); // Debug के लिए
-=======
-    console.log("Found addresses:", addresses); 
->>>>>>> 3316e6f63e778adb377ac4d5fbecfb9b3b04c5f7
     
     res.json({success: true, addresses})
  } catch (error) {
     console.log("Get address error:", error.message);
     res.json({ success: false, message: error.message}); 
-<<<<<<< HEAD
 }
 }
-=======
-}
-}
->>>>>>> 3316e6f63e778adb377ac4d5fbecfb9b3b04c5f7
