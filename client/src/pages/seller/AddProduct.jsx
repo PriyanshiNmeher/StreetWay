@@ -32,10 +32,12 @@ const {axios} = useAppContext()
             formData.append('images',files[i])
          }
 
+        
          const {data} = await axios.post('/api/product/add', formData)
 
          if(data.success){
             toast.success(data.message);
+            
             setName('');
             setDescription('');
             setCategory('');
@@ -46,7 +48,7 @@ const {axios} = useAppContext()
          }else{
             toast.error(data.message)
          }
-
+console.log(data)
        } catch (error) {
             toast.error(error.message)
         

@@ -26,7 +26,11 @@ const Cart = () => {
      const getUserAddress = async ()=>{
         
         try {
-            const {data} = await axios.get('/api/address/get', {params: { userId: user._id },});
+            const {data} = await axios.get('/api/address/get', {params: { userId: user._id },
+              headers: {
+    Authorization: `Bearer ${localStorage.getItem("token")}`,
+  },
+});
             if(data.success){
                 setAddresses(data.addresses)
                 if(data.addresses.length > 0){
@@ -52,7 +56,12 @@ const Cart = () => {
             userId: user._id,
             items: cartArray.map(item=> ({product: item._id, quantity: item.quantity})),
             address: selectedAddress._id
-            })
+            }, {
+  headers: {
+    Authorization: `Bearer ${localStorage.getItem("token")}`,
+  },
+}
+        )
 
             if (data.success) {
                 toast.success(data.message)
@@ -68,9 +77,12 @@ const Cart = () => {
             userId: user._id,
             items: cartArray.map(item=> ({product: item._id, quantity: item.quantity})),
             address: selectedAddress._id
-            })
+            }
+
+        )
 
             if (data.success) {
+                
                window.location.replace(data.url)
             } else {
                 toast.error(data.message)
@@ -93,7 +105,7 @@ const Cart = () => {
         if(user){
             getUserAddress();
         }
-     },[user])
+     },[user,setSelectedAddress ])
 
     
 
