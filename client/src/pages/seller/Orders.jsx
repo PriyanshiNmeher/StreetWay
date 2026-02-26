@@ -10,9 +10,14 @@ const Orders = () => {
 const {currency, axios} = useAppContext()
 const [orders, setOrders] = useState([])
 
-const fetchOrders = async () => {
+const fetchOrders = async () =>{
+    const token = localStorage.getItem('sellertoken');
     try {
-        const {data} = await axios.get('/api/order/seller')
+        const {data} = await axios.get('/api/order/seller', {
+  headers: {
+    Authorization: `Bearer ${token}` 
+  }
+})
         if (data.success) {
             setOrders(data.orders)
         } else {

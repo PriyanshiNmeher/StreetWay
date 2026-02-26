@@ -31,9 +31,20 @@ const {axios} = useAppContext()
          for (let i = 0; i < files.length; i++){
             formData.append('images',files[i])
          }
+<<<<<<< HEAD
 
         
          const {data} = await axios.post('/api/product/add', formData)
+=======
+const token = localStorage.getItem('token')
+         const {data} = await axios.post('/api/product/add', formData,
+            {
+  headers: {
+    'Content-Type': 'multipart/form-data',
+    Authorization: `Bearer ${token}`,
+  },
+         })
+>>>>>>> 3316e6f63e778adb377ac4d5fbecfb9b3b04c5f7
 
          if(data.success){
             toast.success(data.message);

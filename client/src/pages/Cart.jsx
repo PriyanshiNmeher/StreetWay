@@ -29,8 +29,12 @@ const Cart = () => {
             const {data} = await axios.get('/api/address/get', {params: { userId: user._id },
               headers: {
     Authorization: `Bearer ${localStorage.getItem("token")}`,
+<<<<<<< HEAD
   },
 });
+=======
+  },});
+>>>>>>> 3316e6f63e778adb377ac4d5fbecfb9b3b04c5f7
             if(data.success){
                 setAddresses(data.addresses)
                 if(data.addresses.length > 0){
@@ -60,8 +64,12 @@ const Cart = () => {
   headers: {
     Authorization: `Bearer ${localStorage.getItem("token")}`,
   },
+<<<<<<< HEAD
 }
         )
+=======
+})
+>>>>>>> 3316e6f63e778adb377ac4d5fbecfb9b3b04c5f7
 
             if (data.success) {
                 toast.success(data.message)
@@ -77,9 +85,17 @@ const Cart = () => {
             userId: user._id,
             items: cartArray.map(item=> ({product: item._id, quantity: item.quantity})),
             address: selectedAddress._id
+<<<<<<< HEAD
             }
 
         )
+=======
+            }, {
+  headers: {
+    Authorization: `Bearer ${localStorage.getItem("token")}`,
+  },
+})
+>>>>>>> 3316e6f63e778adb377ac4d5fbecfb9b3b04c5f7
 
             if (data.success) {
                 

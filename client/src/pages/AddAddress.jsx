@@ -154,26 +154,44 @@ const handleChange = (e) => {
 const onSubmitHandler = async (e)=>{
     e.preventDefault();
     
+<<<<<<< HEAD
     // ✅ Check user and token before API call
+=======
+   
+>>>>>>> 3316e6f63e778adb377ac4d5fbecfb9b3b04c5f7
     if (!user || !user._id) {
         toast.error("Please login first");
         navigate('/');
         return;
     }
     
+<<<<<<< HEAD
     console.log("User data:", user); // Debug के लिए
     console.log("Address data:", address); // Debug के लिए
                   
     try {
         // ✅ Token set करें
+=======
+    console.log("User data:", user); 
+    console.log("Address data:", address); 
+                  
+    try {
+       
+>>>>>>> 3316e6f63e778adb377ac4d5fbecfb9b3b04c5f7
         setAxiosToken();
         
         const {data} = await axios.post('/api/address/add', {
             address
+<<<<<<< HEAD
             // userId हटाया क्योंकि middleware से आएगा
         });
         
         console.log("Add address response:", data); // Debug के लिए
+=======
+        });
+        
+        console.log("Add address response:", data); 
+>>>>>>> 3316e6f63e778adb377ac4d5fbecfb9b3b04c5f7
                      
         if (data?.success) {
             toast.success(data.message)
